@@ -4,9 +4,9 @@ export const CONVERTER_CATEGORIES = {
     label: "Temperatura",
     title: "Conversor de temperatura",
     units: [
-      { value: "celsius", label: "Celsius (°C)" },
-      { value: "kelvin", label: "Kelvin (K)" },
-      { value: "fahrenheit", label: "Fahrenheit (°F)" },
+      { value: "celsius", label: "Celsius (°C)", min: -273.15, max: 1e9 },
+      { value: "kelvin", label: "Kelvin (K)", min: 0, max: 1e9 },
+      { value: "fahrenheit", label: "Fahrenheit (°F)", min: -459.67, max: 1e9 },
     ],
     defaultFrom: "celsius",
     defaultTo: "fahrenheit",
@@ -15,10 +15,10 @@ export const CONVERTER_CATEGORIES = {
     label: "Velocidad",
     title: "Conversor de velocidad",
     units: [
-      { value: "km/h", label: "km/h" },
-      { value: "mph", label: "mph" },
-      { value: "m/s", label: "m/s" },
-      { value: "ft/s", label: "ft/s" },
+      { value: "km/h", label: "km/h", min: 0, max: 3_600_000 },
+      { value: "mph", label: "mph", min: 0, max: 1_000_000 / 0.44704 },
+      { value: "m/s", label: "m/s", min: 0, max: 1_000_000 },
+      { value: "ft/s", label: "ft/s", min: 0, max: 1_000_000 / 0.3048 },
     ],
     defaultFrom: "km/h",
     defaultTo: "mph",
@@ -27,49 +27,60 @@ export const CONVERTER_CATEGORIES = {
     label: "Longitud",
     title: "Conversor de longitud",
     units: [
-      { value: "m", label: "m" },
-      { value: "km", label: "km" },
-      { value: "cm", label: "cm" },
-      { value: "mm", label: "mm" },
-      { value: "ft", label: "ft" },
-      { value: "in", label: "in" },
-      { value: "yd", label: "yd" },
-      { value: "mi", label: "mi" },
+      { value: "m", label: "m", min: 0, max: 1e12 },
+      { value: "km", label: "km", min: 0, max: 1e9 },
+      { value: "cm", label: "cm", min: 0, max: 1e14 },
+      { value: "mm", label: "mm", min: 0, max: 1e15 },
+      { value: "ft", label: "ft", min: 0, max: 1e12 / 0.3048 },
+      { value: "in", label: "in", min: 0, max: 1e12 / 0.0254 },
+      { value: "yd", label: "yd", min: 0, max: 1e12 / 0.9144 },
+      { value: "mi", label: "mi", min: 0, max: 1e12 / 1609.344 },
     ],
     defaultFrom: "m",
     defaultTo: "km",
   },
 };
 
-export const UnitSelection = ({ category }) => {
-  const { units, defaultFrom, defaultTo } = CONVERTER_CATEGORIES[category];
-
+export const UnitSelection = ({
+  category,
+  fromUnit,
+  toUnit,
+  onFromUnitChange,
+  onToUnitChange,
+}) => {
+  const { units } = CONVERTER_CATEGORIES[category];
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
       <label className="flex flex-col gap-2 text-sm font-semibold text-[#374151]">
         De
         <select
-          defaultValue={defaultFrom}
+          value={fromUnit}
+          onChange={(event) => onFromUnitChange(event.target.value)}
           className="h-[51px] w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 text-base font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
         >
-          {units.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
+          {units
+            .filter(({ value }) => value !== toUnit)
+            .map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
         </select>
       </label>
       <label className="flex flex-col gap-2 text-sm font-semibold text-[#374151]">
         A
         <select
-          defaultValue={defaultTo}
+          value={toUnit}
+          onChange={(event) => onToUnitChange(event.target.value)}
           className="h-[51px] w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 text-base font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
         >
-          {units.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
+          {units
+            .filter(({ value }) => value !== fromUnit)
+            .map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
         </select>
       </label>
     </div>
