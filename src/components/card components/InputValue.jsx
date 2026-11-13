@@ -1,9 +1,7 @@
-
-
+/*
 export const InputValue = () => {
-  
-
   return (
    
   );
 };
+*/
