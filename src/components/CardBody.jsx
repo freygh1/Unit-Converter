@@ -47,7 +47,7 @@ export const CardBody = ({ category }) => {
   };
 
   return (
-    <main className="mt-6 w-full max-w-[572px] rounded-3xl bg-white p-6 sm:p-8">
+    <main className="mt-2 w-full max-w-[572px] rounded-2xl bg-white p-3 sm:mt-6 sm:rounded-3xl sm:p-8">
       <Heading category={category} />
       <InputValue
         key={`${fromUnit}-${inputResetCount}`}
