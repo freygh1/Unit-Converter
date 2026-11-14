@@ -1,7 +1,7 @@
 const formatResult = (value) =>
   new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 1,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 12,
   }).format(value);
 
 export const Results = ({ result, equivalent, fromUnit, unit }) => {
