@@ -69,7 +69,7 @@ export const InputValue = ({ unit, value, onValueChange }) => {
   };
 
   return (
-    <label className="mb-5 flex flex-col gap-2 text-sm font-semibold text-[#374151]">
+    <label className="mb-2 flex flex-col gap-1.5 text-xs font-semibold text-[#374151] sm:mb-5 sm:gap-2 sm:text-sm">
       Valor a convertir
       <input
         ref={inputRef}
@@ -79,7 +79,7 @@ export const InputValue = ({ unit, value, onValueChange }) => {
         onChange={handleChange}
         aria-invalid={limitError}
         aria-describedby={limitError ? "input-range-error" : undefined}
-        className={`h-[51px] w-full rounded-xl border bg-[#F9FAFB] px-4 text-base font-semibold text-[#111827] focus:outline-none focus:ring-2 ${
+        className={`h-11 w-full rounded-xl border bg-[#F9FAFB] px-3 text-base font-semibold text-[#111827] focus:outline-none focus:ring-2 sm:h-[51px] sm:px-4 ${
           limitError
             ? "border-red-500 focus:border-red-500 focus:ring-red-500/30"
             : "border-[#E5E7EB] focus:border-[#3B82F6] focus:ring-[#3B82F6]/30"
@@ -89,7 +89,7 @@ export const InputValue = ({ unit, value, onValueChange }) => {
         <span
           id="input-range-error"
           role="alert"
-          className="font-normal text-red-600"
+          className="text-xs font-normal text-red-600 sm:text-sm"
         >
           El rango permitido para {unit.label} es de {formatLimit(unit.min)} a{" "}
           {formatLimit(unit.max)}.

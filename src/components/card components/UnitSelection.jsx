@@ -74,13 +74,13 @@ export const UnitSelection = ({
 }) => {
   const { units } = CONVERTER_CATEGORIES[category];
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
-      <label className="flex flex-col gap-2 text-sm font-semibold text-[#374151]">
+    <div className="grid grid-cols-2 gap-2 sm:gap-4">
+      <label className="flex flex-col gap-1.5 text-xs font-semibold text-[#374151] sm:gap-2 sm:text-sm">
         De
         <select
           value={fromUnit}
           onChange={(event) => onFromUnitChange(event.target.value)}
-          className="h-[51px] w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 text-base font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
+          className="h-11 w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-2 text-xs font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30 min-[380px]:px-3 min-[380px]:text-sm sm:h-[51px] sm:px-4 sm:text-base"
         >
           {units
             .filter(({ value }) => value !== toUnit)
@@ -91,12 +91,12 @@ export const UnitSelection = ({
             ))}
         </select>
       </label>
-      <label className="flex flex-col gap-2 text-sm font-semibold text-[#374151]">
+      <label className="flex flex-col gap-1.5 text-xs font-semibold text-[#374151] sm:gap-2 sm:text-sm">
         A
         <select
           value={toUnit}
           onChange={(event) => onToUnitChange(event.target.value)}
-          className="h-[51px] w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 text-base font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30"
+          className="h-11 w-full rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-2 text-xs font-semibold text-[#111827] focus:border-[#3B82F6] focus:outline-none focus:ring-2 focus:ring-[#3B82F6]/30 min-[380px]:px-3 min-[380px]:text-sm sm:h-[51px] sm:px-4 sm:text-base"
         >
           {units
             .filter(({ value }) => value !== fromUnit)
