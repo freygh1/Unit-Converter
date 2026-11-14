@@ -35,6 +35,8 @@ Sirve para conversion entre unidades de velocidad, temperatura y longitud.
 - **Velocidad:** desde 0 hasta 10⁶ m/s (unidad base), convertido a la unidad seleccionada. Queda muy por debajo de la velocidad de la luz (c = 299,792,458 m/s).
 - **Longitud:** desde 0 hasta 10¹² m (unidad base), convertido a la unidad seleccionada.
 
+---
+
 > - NOTA 1: los límites superiores son **lógicos, no físicos**. Se eligen por rendimiento numérico en JavaScript y para evitar resultados con exponenciales incómodos. Son constantes fáciles de ampliar si hiciera falta.
 
 ---
