@@ -28,7 +28,10 @@ export const CardBody = ({ category }) => {
   const handleConvert = () => {
     if (!canConvert) return;
 
-    setResultValue(convertValue(category, fromUnit, toUnit, numericValue));
+    setResultValue({
+      value: convertValue(category, fromUnit, toUnit, numericValue),
+      equivalent: convertValue(category, fromUnit, toUnit, 1),
+    });
   };
 
   const handleClear = () => {
@@ -67,7 +70,12 @@ export const CardBody = ({ category }) => {
         onConvert={handleConvert}
         onClear={handleClear}
       />
-      <Results result={resultValue} unit={targetUnit} />
+      <Results
+        result={resultValue?.value ?? null}
+        equivalent={resultValue?.equivalent ?? null}
+        fromUnit={selectedUnit}
+        unit={targetUnit}
+      />
     </main>
   );
 };
