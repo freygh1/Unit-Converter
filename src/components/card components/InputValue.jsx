@@ -9,11 +9,11 @@ const formatNumber = (value) => {
 const formatLimit = (value) =>
   new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(value);
 
-export const InputValue = ({ unit }) => {
-  const [value, setValue] = useState("");
+export const InputValue = ({ unit, value, onValueChange }) => {
   const [limitError, setLimitError] = useState(false);
   const inputRef = useRef(null);
   const nextCaretPosition = useRef(null);
+  const formattedValue = formatNumber(value);
 
   useLayoutEffect(() => {
     if (nextCaretPosition.current !== null) {
@@ -65,7 +65,7 @@ export const InputValue = ({ unit }) => {
     }
 
     nextCaretPosition.current = newCaretPosition;
-    setValue(formattedValue);
+    onValueChange(ungroupedValue);
   };
 
   return (
@@ -75,7 +75,7 @@ export const InputValue = ({ unit }) => {
         ref={inputRef}
         type="text"
         inputMode="decimal"
-        value={value}
+        value={formattedValue}
         onChange={handleChange}
         aria-invalid={limitError}
         aria-describedby={limitError ? "input-range-error" : undefined}
